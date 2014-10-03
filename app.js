@@ -4,6 +4,7 @@ var jsonData;
 var index = 0;
 var pop = 0;
 var length;
+recognition.lang = "en-GB";
 recognition.onresult = function(event) {
   console.log(event)
   song = event.results[0][0].transcript;
@@ -27,3 +28,8 @@ recognition.onresult = function(event) {
 
 recognition.start();
 
+/* todo: 
+  make pure javascript ajax call
+  give options to choose language
+  give options to choose in terms of popularity
+*/
