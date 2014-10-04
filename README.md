@@ -5,7 +5,7 @@ TL:DR; Receives input from Microphone, and redirects you to a Spotify Song
 
 This little app uses voice recognition to detect what you say, than it looks on Spotify for that song. Spotify will return a list with up to 100 songs, than the app will select the most popular of those songs, and redirect you to the song.
 
-To look at it in action, go to https://iagowp.github.io/micToSong/
+To look at it in action, go to http://iagowp.github.io/micToSong/
 
 If you want to contribute, some mapped features to be added:
 
