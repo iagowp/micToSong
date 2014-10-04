@@ -40,4 +40,11 @@ recognition.start();
   Make a css file, this looks bad
   create a button to start the app
   make it deal with errors more gracefully
+  find a lyrics api
+    let the user choose wether hes saying song title/band title or lyrics
+    in case its a lyric, query the lyric api
+    find the name of the song on the result
+    query spotify for the name of the song
+    success
+  Chrome extension
 */
