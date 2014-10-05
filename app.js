@@ -1,11 +1,7 @@
-var song;
-var jsonData;
-var index = 0;
-var pop = 0;
-var length;
 var recognition = new webkitSpeechRecognition();
 recognition.lang = "en-US";
 recognition.onresult = function(event) {
+  var song;
   console.log(event)
   //get what was said in the mic
   song = event.results[0][0].transcript;
@@ -20,7 +16,8 @@ recognition.onresult = function(event) {
       songs = data.tracks;
       console.log(songs);
       //just caching array length
-      length = songs.length;
+      var length = songs.length;
+      var pop = index = 0;
       //loop over the array to get most popular one
       for(var i = 0; i < length; i++){
         if(songs[i].popularity > pop){
@@ -40,7 +37,7 @@ recognition.onresult = function(event) {
 
 /* todo: 
   make pure javascript ajax call
-  give options to choose language
+  give options to choose language -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
   give options to choose in terms of popularity -> right now is most popular, make it able to choose least popular, or a determined number
   option to get more results
   Make a css file, this looks bad
