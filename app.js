@@ -1,10 +1,9 @@
 var recognition = new webkitSpeechRecognition();
 recognition.lang = "en-US";
 recognition.onresult = function(event) {
-  var song;
   console.log(event)
   //get what was said in the mic
-  song = event.results[0][0].transcript;
+  var song = event.results[0][0].transcript;
   console.log(song)
   // query spotify for it
   $.get( "http://ws.spotify.com/search/1/track.json?q="+ song, function( data ) {
@@ -13,11 +12,11 @@ recognition.onresult = function(event) {
     if(data.info.num_results === 0){
       alert("Search failed. Sorry, but you can try again")
     } else {
-      songs = data.tracks;
+      var pop = index = 0;
+      var songs = data.tracks;
       console.log(songs);
       //just caching array length
       var length = songs.length;
-      var pop = index = 0;
       //loop over the array to get most popular one
       for(var i = 0; i < length; i++){
         if(songs[i].popularity > pop){
