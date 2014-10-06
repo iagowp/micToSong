@@ -1,3 +1,5 @@
+if(window.location.href === "https://iagowp.github.io/micToSong/") windo.location = "http://iagowp.github.io/micToSong/";
+
 var recognition = new webkitSpeechRecognition();
 recognition.onresult = function(event) {
   console.log(event)
