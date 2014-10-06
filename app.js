@@ -1,43 +1,53 @@
-var song;
 var recognition = new webkitSpeechRecognition();
-var jsonData;
-var index = 0;
-var pop = 0;
-var length;
-recognition.lang = "en-GB";
 recognition.onresult = function(event) {
   console.log(event)
-  song = event.results[0][0].transcript;
+  //get what was said in the mic
+  var song = event.results[0][0].transcript;
   console.log(song)
+  // query spotify for it
   $.get( "http://ws.spotify.com/search/1/track.json?q="+ song, function( data ) {
     console.log(data)
+    // check if the query returned any song
     if(data.info.num_results === 0){
-      alert("Search failed, Sorry")
+      alert("Search failed. Sorry, but you can try again")
     } else {
-      jsonData = data.tracks;
-      console.log(jsonData);
-      length = jsonData.length;
+      var pop = index = 0;
+      var songs = data.tracks;
+      console.log(songs);
+      //just caching array length
+      var length = songs.length;
+      //loop over the array to get most popular one
       for(var i = 0; i < length; i++){
-        if(jsonData[i].popularity > pop){
-          pop = jsonData[i].popularity;
+        if(songs[i].popularity > pop){
+          pop = songs[i].popularity;
           index = i;
         }
       }
-      var url = "https://open.spotify.com/track/" + jsonData[index].href.split(":")[2]
+      // build the url to redirect
+      var url = "https://open.spotify.com/track/" + songs[index].href.split(":")[2]
       console.log(url);
-      window.location=url;     
+      // redirect user to spotify
+      window.location = url;     
     }
   });
-}
+};
+
+var appStart = function(){
+  recognition.lang = $('#language').val(); // need to change this when transforming the ajax function into vanilla javascript
+  console.log(recognition.lang);
+  recognition.start();
+};
 
 
 /* todo: 
   make pure javascript ajax call
-  give options to choose language
+  give options to choose language -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
+  if confidence on the result is low, tell user to say it again
   give options to choose in terms of popularity -> right now is most popular, make it able to choose least popular, or a determined number
   option to get more results
   Make a css file, this looks bad
   make it deal with errors more gracefully
+  sort the array by popularity, instead of just selecting most popular song
   find a lyrics api
     let the user choose wether hes saying song title/band title or lyrics
     in case its a lyric, query the lyric api
@@ -45,4 +55,5 @@ recognition.onresult = function(event) {
     query spotify for the name of the song
     success
   Chrome extension
+  add a sign a of life to people waittin
 */

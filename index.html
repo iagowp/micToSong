@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="app.js"></script>
     <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="app.js"></script>
   </head>
   <body>
     <p>
       Hey, this will only work for Chrome users who have  a microphone, and to actually listen to the song, you need a Spotify account.
     </p>
     <p>Github repo: <a href="https://github.com/iagowp/micToSong">micToSong</a></p>
-    <p>Press start, say something to your mic, and wait to be redirected to Spotify</p>
-    <button onclick="recognition.start()">Start</button>
+    <p>Press start, allow access to your microphone if necessary, say something to your mic, and wait to be redirected to Spotify</p>
+    <select id="language" style="display: block;"> 
+    <!-- ugh, inline styling! NEED .... CHANGEEE ... IIIT -->
+      <option value="en-US">American English</option>
+      <option value="en-GB">Britain English</option>
+    </select>
+    <button onclick="appStart()">Start</button>
   </body>
 
   <script>
