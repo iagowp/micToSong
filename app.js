@@ -1,3 +1,4 @@
+// https have a problem with calling spotify api with a http protocol, so I force http
 if(window.location.href === "https://iagowp.github.io/micToSong/") window.location = "http://iagowp.github.io/micToSong/";
 
 var recognition = new webkitSpeechRecognition();
@@ -9,8 +10,9 @@ recognition.onresult = function(event) {
   // query spotify for it
   $.get( "http://ws.spotify.com/search/1/track.json?q="+ song, function( data ) {
     console.log(data)
-    // check if the query returned any song
+
     resultsNum = data.info.num_results; // this property can be used to return more results
+    // check if the query returned any song
     if(resultsNum === 0){
       alert("Search failed. Sorry, try again please.")
     } else {
@@ -44,7 +46,7 @@ var appStart = function(){
 /* todo: 
   make pure javascript ajax call
   give options to choose language -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
-  if confidence on the result(of what the person said) is low, tell user to say it again
+  if confidence (need to define how much is low) on the result(of what the person said) is low, tell user to say it again
   option to get more results
   Make a css file, this looks bad
   make it deal with errors more gracefully
@@ -54,6 +56,6 @@ var appStart = function(){
     find the name of the song on the result
     query spotify for the name of the song
     success
-  Chrome extension
+  make it a Chrome extension
   add a sign a of life to people waittin
 */
