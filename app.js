@@ -15,7 +15,7 @@ recognition.onresult = function(event) {
       var songs = data.tracks;
       console.log(songs);
 
-      var index = $('#popularity').val();
+      var index = $('#popularity').val(); // need to change this when transforming the ajax function into vanilla javascript
 
       if(index === 'r'){
         index =  Math.floor(Math.random() * 99);
@@ -42,12 +42,10 @@ var appStart = function(){
 /* todo: 
   make pure javascript ajax call
   give options to choose language -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
-  if confidence on the result is low, tell user to say it again
-  give options to choose in terms of popularity -> right now is most popular, make it able to choose least popular, or a determined number
+  if confidence on the result(of what the person said) is low, tell user to say it again
   option to get more results
   Make a css file, this looks bad
   make it deal with errors more gracefully
-  sort the array by popularity, instead of just selecting most popular song
   find a lyrics api
     let the user choose wether hes saying song title/band title or lyrics
     in case its a lyric, query the lyric api
