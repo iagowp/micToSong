@@ -1,5 +1,4 @@
 var recognition = new webkitSpeechRecognition();
-recognition.lang = "en-US";
 recognition.onresult = function(event) {
   console.log(event)
   //get what was said in the mic
@@ -31,12 +30,19 @@ recognition.onresult = function(event) {
       window.location = url;     
     }
   });
-}
+};
+
+var appStart = function(){
+  recognition.lang = $('#language').val(); // need to change this when transforming the ajax function into vanilla javascript
+  console.log(recognition.lang);
+  recognition.start();
+};
 
 
 /* todo: 
   make pure javascript ajax call
   give options to choose language -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
+  if confidence on the result is low, tell user to say it again
   give options to choose in terms of popularity -> right now is most popular, make it able to choose least popular, or a determined number
   option to get more results
   Make a css file, this looks bad
@@ -49,4 +55,5 @@ recognition.onresult = function(event) {
     query spotify for the name of the song
     success
   Chrome extension
+  add a sign a of life to people waittin
 */
