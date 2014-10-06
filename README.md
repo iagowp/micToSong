@@ -1,4 +1,4 @@
-micToSong
+*micToSong
 =========
 
 TL:DR; Receives input from Microphone, and redirects you to a Spotify Song
@@ -11,14 +11,29 @@ If you want to contribute, some mapped features to be added:
 
 make pure javascript ajax call
 
-give options to choose language
+give options to choose all languages -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
 
-give options to choose in terms of popularity -> right now is most popular, make it able to choose least popular, or a determined number
+if confidence on the result(of what the person said) is low, tell user to say it again
+
 
 option to get more results
 
+
 Make a css file, this looks bad
 
-create a button to start the app
 
 make it deal with errors more gracefully
+
+
+find a lyrics api
+  let the user choose wether hes saying song title/band title or lyrics
+  in case its a lyric, query the lyric api
+  find the name of the song on the result
+  query spotify for the name of the song
+  success
+
+
+Chrome extension
+
+
+add a sign a of life to people waittin

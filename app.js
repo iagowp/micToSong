@@ -8,21 +8,22 @@ recognition.onresult = function(event) {
   $.get( "http://ws.spotify.com/search/1/track.json?q="+ song, function( data ) {
     console.log(data)
     // check if the query returned any song
-    if(data.info.num_results === 0){
-      alert("Search failed. Sorry, but you can try again")
+    resultsNum = data.info.num_results; // this property can be used to return more results
+    if(resultsNum === 0){
+      alert("Search failed. Sorry, try again please.")
     } else {
-      var pop = index = 0;
       var songs = data.tracks;
       console.log(songs);
-      //just caching array length
-      var length = songs.length;
-      //loop over the array to get most popular one
-      for(var i = 0; i < length; i++){
-        if(songs[i].popularity > pop){
-          pop = songs[i].popularity;
-          index = i;
-        }
+
+      var index = $('#popularity').val(); // need to change this when transforming the ajax function into vanilla javascript
+
+      if(index === 'r'){
+        index =  Math.floor(Math.random() * 99);
       }
+      if(index > resultsNum) index = resultsNum;
+
+      console.log(index)
+      
       // build the url to redirect
       var url = "https://open.spotify.com/track/" + songs[index].href.split(":")[2]
       console.log(url);
@@ -34,7 +35,6 @@ recognition.onresult = function(event) {
 
 var appStart = function(){
   recognition.lang = $('#language').val(); // need to change this when transforming the ajax function into vanilla javascript
-  console.log(recognition.lang);
   recognition.start();
 };
 
@@ -42,12 +42,10 @@ var appStart = function(){
 /* todo: 
   make pure javascript ajax call
   give options to choose language -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
-  if confidence on the result is low, tell user to say it again
-  give options to choose in terms of popularity -> right now is most popular, make it able to choose least popular, or a determined number
+  if confidence on the result(of what the person said) is low, tell user to say it again
   option to get more results
   Make a css file, this looks bad
   make it deal with errors more gracefully
-  sort the array by popularity, instead of just selecting most popular song
   find a lyrics api
     let the user choose wether hes saying song title/band title or lyrics
     in case its a lyric, query the lyric api
