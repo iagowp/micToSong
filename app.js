@@ -8,21 +8,22 @@ recognition.onresult = function(event) {
   $.get( "http://ws.spotify.com/search/1/track.json?q="+ song, function( data ) {
     console.log(data)
     // check if the query returned any song
-    if(data.info.num_results === 0){
-      alert("Search failed. Sorry, but you can try again")
+    resultsNum = data.info.num_results; // this property can be used to return more results
+    if(resultsNum === 0){
+      alert("Search failed. Sorry, try again please.")
     } else {
-      var pop = index = 0;
       var songs = data.tracks;
       console.log(songs);
-      //just caching array length
-      var length = songs.length;
-      //loop over the array to get most popular one
-      for(var i = 0; i < length; i++){
-        if(songs[i].popularity > pop){
-          pop = songs[i].popularity;
-          index = i;
-        }
+
+      var index = $('#popularity').val();
+
+      if(index === 'r'){
+        index =  Math.floor(Math.random() * 99);
       }
+      if(index > resultsNum) index = resultsNum;
+
+      console.log(index)
+      
       // build the url to redirect
       var url = "https://open.spotify.com/track/" + songs[index].href.split(":")[2]
       console.log(url);
@@ -34,7 +35,6 @@ recognition.onresult = function(event) {
 
 var appStart = function(){
   recognition.lang = $('#language').val(); // need to change this when transforming the ajax function into vanilla javascript
-  console.log(recognition.lang);
   recognition.start();
 };
 
