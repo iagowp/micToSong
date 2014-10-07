@@ -24,7 +24,7 @@ recognition.onresult = function(event) {
       if(index === 'r'){
         index =  Math.floor(Math.random() * 99);
       }
-      if(index > resultsNum) index = resultsNum;
+      if(index > resultsNum) index = resultsNum-1;
 
       console.log(index)
       
