@@ -1,8 +1,11 @@
 // https have a problem with calling spotify api with a http protocol, so I force http
 if(window.location.href === "https://iagowp.github.io/micToSong/") window.location = "http://iagowp.github.io/micToSong/";
 
+var started = false;
+
 var recognition = new webkitSpeechRecognition();
 recognition.onresult = function(event) {
+  started = true;
   console.log(event)
   //get what was said in the mic
   var song = event.results[0][0].transcript;
@@ -37,13 +40,23 @@ recognition.onresult = function(event) {
   });
 };
 
+//when it ends, and theres no result, warn person
+recognition.onend = function(){
+  if(started === false){
+    alert("Sorry, I couldn't understand what you said, could you try again?")
+  } else {
+    started = false;
+  }
+}
+
 var appStart = function(){
   recognition.lang = $('#language').val(); // need to change this when transforming the ajax function into vanilla javascript
   recognition.start();
 };
 
 
-/* todo: 
+/* todo:
+  open in new tab
   make pure javascript ajax call
   give options to choose language -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
   if confidence (need to define how much is low) on the result(of what the person said) is low, tell user to say it again
