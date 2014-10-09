@@ -35,7 +35,8 @@ recognition.onresult = function(event) {
       var url = "https://open.spotify.com/track/" + songs[index].href.split(":")[2]
       console.log(url);
       // redirect user to spotify
-      window.location = url;     
+      // window.location = url;   
+      window.pop.location = url;  
     }
   });
 };
@@ -49,7 +50,11 @@ recognition.onend = function(){
   }
 }
 
+document.getElementById('start').addEventListener('click', appStart)
+
+
 var appStart = function(){
+  window.focus();
   recognition.lang = $('#language').val(); // need to change this when transforming the ajax function into vanilla javascript
   recognition.start();
 };
