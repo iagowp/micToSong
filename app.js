@@ -22,7 +22,7 @@ recognition.onresult = function(event) {
       var songs = data.tracks;
       console.log(songs);
 
-      var index = $('#popularity').val(); // need to change this when transforming the ajax function into vanilla javascript
+      var index = document.getElementById('popularity').value // need to change this when transforming the ajax function into vanilla javascript
 
       if(index === 'r'){
         index =  Math.floor(Math.random() * 99);
@@ -36,7 +36,7 @@ recognition.onresult = function(event) {
       console.log(url);
       // redirect user to spotify
       window.location = url;   
-      window.pop.location = url;  
+      // window.pop.location = url;  
     }
   });
 };
@@ -55,7 +55,7 @@ recognition.onend = function(){
 
 var appStart = function(){
   // window.focus();
-  recognition.lang = $('#language').val(); // need to change this when transforming the ajax function into vanilla javascript
+  recognition.lang =  document.getElementById('language').value;
   recognition.start();
 };
 
