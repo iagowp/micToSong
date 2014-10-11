@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <p>
@@ -12,19 +13,18 @@
     </p>
     <p>Github repo: <a href="https://github.com/iagowp/micToSong">micToSong</a></p>
     <p>Select your language, choose how you want the song to be chosen, in terms of popularity, and then press start. Allow access to your microphone if necessary, say something to your mic, and wait to be redirected to Spotify</p>
-    <select id="language" style="display: block;"> 
-    <!-- ugh, inline styling! NEED .... CHANGEEE ... IIIT -->
+    <select id="language"> 
       <option value="en-US">American English</option>
       <option value="en-GB">Britain English</option>
       <option value="pt-BR">Português do Brasil</option>
     </select>
-    <select id="popularity" style="display: block;">
-    <!-- ugh, inline styling! NEED .... CHANGEEE ... IIIT -->
+    <select id="popularity">
       <option value="0">Most popular</option>
       <option value="r">Random song</option>
       <option value="99">Least popular</option>
     </select>
-    <button onclick="appStart()">Start</button>
+    <button id="start" onclick="appStart()">Start</button>
+    <!-- <button id="start" onclick="window.pop = window.open('about:blank', '_blank')">Start</button> -->
   </body>
 
   <script>
