@@ -9,8 +9,6 @@ This little app uses voice recognition to detect what you say, than it looks on 
 
 If you want to contribute, some mapped features to be added:
 
-make pure javascript ajax call
-
 give options to choose all languages -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
 
 if confidence on the result(of what the person said) is low, tell user to say it again
