@@ -11,34 +11,45 @@ recognition.onresult = function(event) {
   var song = event.results[0][0].transcript;
   console.log(song)
   // query spotify for it
-  $.get( "http://ws.spotify.com/search/1/track.json?q="+ song, function( data ) {
-    console.log(data)
 
-    resultsNum = data.info.num_results; // this property can be used to return more results
-    // check if the query returned any song
-    if(resultsNum === 0){
-      alert("Search failed. Sorry, try again please.")
-    } else {
-      var songs = data.tracks;
-      console.log(songs);
+  // pure js ajax call
+  var request = new XMLHttpRequest();
 
-      var index = document.getElementById('popularity').value // need to change this when transforming the ajax function into vanilla javascript
+  request.onreadystatechange = function(){
+    // state 4 is when it gets a result
+    if(request.readyState === 4){
+      var data = JSON.parse(request.responseText);
 
-      if(index === 'r'){
-        index =  Math.floor(Math.random() * 99);
+      console.log(data)
+
+      resultsNum = data.info.num_results; // this property can be used to return more results
+      // check if the query returned any song
+      if(resultsNum !== 0){
+        var songs = data.tracks;
+        console.log(songs);
+
+        var index = document.getElementById('popularity').value;
+
+        if(index === 'r') index =  Math.floor(Math.random() * 99);
+
+        if(index > resultsNum) index = resultsNum-1;
+
+        console.log(index);
+        
+        // build the url to redirect
+        var url = "https://open.spotify.com/track/" + songs[index].href.split(":")[2]
+        console.log(url);
+        // redirect user to spotify
+        window.location = url;   
+      } else {
+        alert("Search failed. Sorry, try again please.")
       }
-      if(index > resultsNum) index = resultsNum-1;
-
-      console.log(index)
-      
-      // build the url to redirect
-      var url = "https://open.spotify.com/track/" + songs[index].href.split(":")[2]
-      console.log(url);
-      // redirect user to spotify
-      window.location = url;   
-      // window.pop.location = url;  
     }
-  });
+  };
+
+  request.open("GET", "http://ws.spotify.com/search/1/track.json?q="+ song, true);
+
+  request.send();
 };
 
 //when it ends, and theres no result, warn person
@@ -50,9 +61,6 @@ recognition.onend = function(){
   }
 }
 
-// document.getElementById('start').addEventListener('click', appStart)
-
-
 var appStart = function(){
   // window.focus();
   recognition.lang =  document.getElementById('language').value;
@@ -62,7 +70,6 @@ var appStart = function(){
 
 /* todo:
   open in new tab
-  make pure javascript ajax call
   give options to choose language -> this looks like a good place to get that data: http://msdn.microsoft.com/en-us/library/ms533052(v=vs.85).aspx
   if confidence (need to define how much is low) on the result(of what the person said) is low, tell user to say it again
   option to get more results

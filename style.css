@@ -1,8 +1,21 @@
 body{
   width: 600px;
   margin: 0 auto;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  text-align: center;
 }
 
-select{
+p:first-child{
+  background-color: beige;
+}
+
+select, button, label{
   display: block;
+}
+
+select, button{
+  width: 170px;
+  border-radius: 5px;
+  margin: 5px auto
 }
