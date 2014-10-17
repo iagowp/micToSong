@@ -4,10 +4,11 @@ body{
   font-size: 1.2em;
   line-height: 1.5em;
   text-align: center;
+  background-color: whitesmoke;
 }
 
 p:first-child{
-  background-color: beige;
+  background-color: #FAD9AD;
 }
 
 select, button, label{
